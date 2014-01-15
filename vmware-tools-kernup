@@ -1,0 +1,19 @@
+#!/bin/bash
+
+kern=$(uname -r)
+
+if [ ! -f /root/kern ]
+then
+	echo $kern > /root/kern
+else
+	ckern=$(cat /root/kern)
+fi
+
+if [ ! $kern == $ckern ]
+then
+	echo $kern > /root/kern
+	if [ -f /root/vmware-tools-distrib/vmware-install.pl ]
+	then
+		/root/vmware-tools-distrib/vmware-install.pl --default
+	fi
+fi
