@@ -1,7 +1,7 @@
 vmware-tools-kernup is a script I wrote to re-compile the vmware kernel modules, after a kernal upgrade.
 This script will only work if it is run before and after a kernel upgrade. 
 
-Preferabbly run periodically as a cron job or on system start-up.
+Preferably run periodically as a cron job or on system start-up.
 
 This script will also only work if the vmware installation lives in the following directory:
 /root/vmware-tools-distrib/vmware-install.pl

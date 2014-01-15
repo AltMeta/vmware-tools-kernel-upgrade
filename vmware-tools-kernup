@@ -2,18 +2,36 @@
 
 kern=$(uname -r)
 
-if [ ! -f /root/kern ]
-then
-	echo $kern > /root/kern
-else
-	ckern=$(cat /root/kern)
-fi
-
-if [ ! $kern == $ckern ]
-then
-	echo $kern > /root/kern
-	if [ -f /root/vmware-tools-distrib/vmware-install.pl ]
+checkroot()
+{
+	if [ "$(id -u)" != "0" ]
 	then
-		/root/vmware-tools-distrib/vmware-install.pl --default
+	   echo "This script must be run as root" 1>&2
+	   exit 1
 	fi
-fi
+}
+
+
+kerncheck()
+{
+
+
+	if [ ! -f /root/kern ]
+	then
+		echo $kern > /root/kern
+	else
+		ckern=$(cat /root/kern)
+	fi
+
+	if [ ! $kern == $ckern ]
+	then
+		echo $kern > /root/kern
+		if [ -f /root/vmware-tools-distrib/vmware-install.pl ]
+		then
+			/root/vmware-tools-distrib/vmware-install.pl --default
+		fi
+	fi
+}
+
+checkroot
+kerncheck
